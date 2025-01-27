@@ -16,10 +16,13 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 # Разрешенные источники
-origins = [
-    "http://localhost",  # Разрешаем localhost для порта 8888
-    # Добавь другие домены или порты, с которых ты ожидаешь запросы
-]
+environment = os.getenv("ENVIRONMENT", "development")  # 'development' или 'production'
+
+if environment == "production":
+    origins = ["https://your-frontend-domain.com"]
+else:
+    origins = ["*"]  # Для локальной разработки
+
 
 # Настройка CORS
 app.add_middleware(
@@ -197,3 +200,8 @@ def update_comment(comment_id: int, comment: schemas.CommentCreate, db: Session 
 
     return updated_comment
 
+if __name__ == "__main__":
+    import uvicorn
+    import os
+    port = int(os.environ.get("PORT", 8000))  # Используем PORT из переменных окружения
+    uvicorn.run(app, host="0.0.0.0", port=port)
