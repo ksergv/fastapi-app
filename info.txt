@@ -1,0 +1,21 @@
+Сервер Fast API на python
+
+Создание окружения если нет
+python3 -m venv venv
+
+Запуск программы
+pip install fastapi uvicorn sqlalchemy pydantic
+
+Активация окружения если есть
+source venv/bin/activate
+
+Инсталляция всего
+pip install -r requirements.txt
+После установки зависимостей вы можете проверить установленные пакеты, используя команду:
+pip list
+Когда вы закончите работу с проектом, вы можете деактивировать виртуальное окружение с помощью команды:
+deactivate
+ Активация  окружения из pycharm
+source ~/my_fastapi_app/bin/activate
+Запуск сервера
+uvicorn main:app --reload
