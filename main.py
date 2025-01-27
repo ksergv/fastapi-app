@@ -6,8 +6,7 @@ from datetime import timedelta, datetime
 from jose import JWTError, jwt
 from typing import List
 from pydantic import BaseModel
-from fastapi.middlew
-are.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 import models, schemas, crud
 from database import SessionLocal, engine, Base
 from auth import authenticate_user, create_access_token, oauth2_scheme, verify_token, Token, create_refresh_token
@@ -17,12 +16,10 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 # Разрешенные источники
-environment = os.getenv("ENVIRONMENT", "production")  # 'development' или 'production'
-
-if environment == "production":
-    origins = ["*"]
-else:
-    origins = ["http://localhost"]  # Для локальной разработки
+origins = [
+    "http://localhost",  
+    "https://fastapi-app-b47b.onrender.com"
+]
 
 # Настройка CORS
 app.add_middleware(
