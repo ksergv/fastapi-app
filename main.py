@@ -16,10 +16,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 # Разрешенные источники
-origins = [
-    "http://localhost",  
-    "https://fastapi-app-b47b.onrender.com"
-]
+origins = ["*"]
 
 # Настройка CORS
 app.add_middleware(
